@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration - MuseXion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/pillango1.png' %}">
+</head>
+
+<body>
+  <div class="register-container">
+    <!-- BAL OLDALI SZÖVEG -->
+    <div class="side-text">
+      <p><em>Welcome!</em><br>
+      Create your <span class="green">free</span> account.</p>
+      <h2>Registration</h2>
+    </div>
+
+    <!-- JOBB OLDALI FORM -->
+    <div class="form-box">
+      <!-- Registration Form -->
+      <form id="register-form">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" maxlength="60" pattern="^[a-z0-9._]+$" 
+               title="Only lowercase letters, numbers, dot and underscore are allowed" required>
+
+        <label for="first_name">First name</label>
+        <input type="text" id="first_name" name="first_name" required>
+
+        <label for="last_name">Last name</label>
+        <input type="text" id="last_name" name="last_name" required>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" minlength="6" required>
+
+        <label for="password2">Password again</label>
+        <input type="password" id="password2" name="password2" minlength="6" required>
+
+        <button type="submit" class="btn-submit">Sign up</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal OTP Verification -->
+  <div id="verify-modal" class="modal">
+    <div class="modal-content">
+      <h2>Email Verification</h2>
+      <p>We sent a 6-digit code to your email. Please enter it below:</p>
+      <form id="verify-form">
+        <input type="text" id="otp" name="otp" maxlength="6" required placeholder="Enter code">
+        <p id="otp-error" class="error-message" style="display:none;"></p>
+        <p id="otp-success" class="success-message" style="display:none; color: #00cc66; text-align: center; font-weight: 500;"></p>
+        <button type="submit">Verify</button>
+      </form>
+    </div>
+  </div>
+
+<script>
+  document.getElementById("register-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // 🧹 Tokenek törlése
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+
+    const username = document.getElementById("username").value.toLowerCase();
+    const first_name = document.getElementById("first_name").value;
+    const last_name = document.getElementById("last_name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const password2 = document.getElementById("password2").value;
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    try {
+      const response = await fetch("/api/v1/auth/api/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "X-CSRFToken": csrftoken
+        },
+        body: JSON.stringify({
+          username,
+          first_name,
+          last_name,
+          email,
+          password,
+          password2
+        }),
+      });
+
+      console.log("response.status:", response.status);
+      console.log("response headers:", response.headers);
+      console.log("response ok:", response.ok);
+
+      let data = null;
+      let message = "Ismeretlen hiba";
+
+      try {
+        const clone = response.clone();
+        data = await clone.json();
+        console.log("🔍 JSON response:", data);
+      } catch (jsonErr) {
+        const text = await response.text();
+        console.error("❌ JSON parse hiba, szöveges válasz:", text);
+        message = text || "Nem sikerült értelmezni a választ.";
+      }
+
+      if (response.status === 201) {
+        localStorage.setItem("verifyEmail", email);
+        document.getElementById("verify-modal").classList.add("active");
+      } else {
+        message = (data && data.message) || JSON.stringify(data || {}) || message;
+        alert("❌ Registration failed: " + message);
+      }
+
+    } catch (error) {
+      alert("❌ Network error: " + error);
+    }
+  });
+
+  // OTP VERIFICATION
+  document.getElementById("verify-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const otp = document.getElementById("otp").value;
+    const errorBox = document.getElementById("otp-error");
+    errorBox.style.display = "none";
+
+    try {
+      const email = localStorage.getItem("verifyEmail");
+
+      const response = await fetch("/api/verify-email/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ otp, email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("✅ " + data.message);
+        window.location.href = "/login/";
+      } else {
+        errorBox.innerText = data.message || "Invalid verification code";
+        errorBox.style.display = "block";
+      }
+    } catch (error) {
+      errorBox.innerText = "Network error. Please try again.";
+      errorBox.style.display = "block";
+    }
+  });
+</script>
+
+
+
+
+
+</body>
+</html>
+

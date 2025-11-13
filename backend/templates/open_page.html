@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MuseXion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/open_page.css' %}" />
+  <link rel="icon" type="image/png" href="{% static 'images/pillango1.png' %}" />
+</head>
+<body>
+  <h1 class="logo">MuseXion</h1>
+  <p class="tagline">A digital art community for artists & art lovers</p>
+
+  <div class="buttons">
+    <a href="{% url 'custom-login' %}" class="btn">Sign in</a>
+    <a href="{% url 'register' %}" class="btn btn-join">Join us</a>
+  </div>
+
+  <div class="section">
+    <div class="block">
+      <h3>For Artists:</h3>
+      <p>Upload your art.<br>Share your vision.<br>Support.<br>Connect.</p>
+    </div>
+    <div class="block">
+      <h3>For Art Lovers:</h3>
+      <p>Support.<br>Connect.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a onclick="openModal('aboutModal')">About</a>
+    <a onclick="openModal('contactModal')">Contact</a>
+    <a onclick="openModal('privacyModal')">Privacy Policy</a>
+  </footer>
+
+  <!-- === Modal sablonok === -->
+  <div id="aboutModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-content">
+        <h2>About MuseXion</h2>
+        <p>MuseXion is a digital platform built for artists and art enthusiasts to share and discover original artworks in a creative community environment.</p>
+        <p>The platform was developed as part of a university thesis focusing on user experience and data protection. Core features include user registration, customizable profiles, artwork posting with text, images, and videos, hashtags and categories, likes, comments, and notifications.</p>
+        <p>Content is displayed in a dynamic feed, and users can follow each other, interact through modals, and explore art based on tags or creators. The design and functionality aim to reflect the needs of a modern artistic community in a secure and intuitive interface.</p>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('aboutModal')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="contactModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-content">
+        <h2>Contact Me</h2>
+        <p>If you have questions, feedback, or technical issues regarding MuseXion, feel free to reach out:</p>
+        <ul>
+          <li>Email: lorasznt.it@gmail.com</li>
+          <li>GitHub: <a href="https://github.com/yourname/musexion" target="_blank">musexion project</a></li>
+          <li>University: Lora Szántó, Business Informatics Bsc</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('contactModal')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="privacyModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-content">
+        <h2>Privacy Policy</h2>
+        <p>MuseXion respects your privacy and is committed to protecting your personal information.</p>
+        <p>We collect and store only the data necessary to run the platform: your username, email address, profile details (such as profile picture, bio, and artist type), and any content you voluntarily upload (posts, comments, likes).</p>
+        <p>All user authentication and session management are handled securely using JSON Web Tokens (JWT). Media files are stored in a protected environment, and all communication between your browser and our backend runs over HTTPS during deployment.</p>
+        <p>Your data is never shared with third parties, and is only accessible to you and system administrators. If you request deletion of your account, all your personal data and uploaded content will be permanently removed.</p>
+        <p>MuseXion is built with Django (Python), MySQL, and JavaScript, following best practices in backend and frontend development. Data is handled responsibly according to academic and ethical standards.</p>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('privacyModal')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal vezérlés -->
+  <script>
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay').forEach(modal => modal.classList.add('hidden'));
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Lora', serif;
+}
+
+/* OLDAL KONTAINER */
+.register-container,
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: 100px;
+}
+
+/* BAL OLDALI SZÖVEG */
+.side-text {
+  text-align: left;
+  max-width: 390px;
+}
+
+.side-text em {
+  font-style: italic;
+  font-size: 26px;
+}
+
+.side-text .green {
+  color: #00cc44;
+  font-size: 26px;
+}
+
+.side-text p {
+  font-size: 26px;
+  margin: 0;
+}
+
+.side-text h2 {
+  font-size: 47px;
+  margin-top: 26px;
+  font-family: 'MuseXionFont', serif;
+}
+
+/*  BOX */
+.form-box {
+  background: #fff;
+  color: #000;
+  padding: 42px;
+  border-radius: 52px;
+  width: 365px;
+  text-align: center;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+}
+
+/* GOOGLE GOMB */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px;
+  font-size: 17px;
+  border: 1px solid #ccc;
+  border-radius: 26px;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-google img {
+  width: 21px;
+  height: 21px;
+}
+
+.btn-google:hover {
+  background: #f1f1f1;
+}
+
+.or {
+  margin: 20px 0;
+  color: #555;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+form label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 0;
+}
+
+form input {
+  padding: 13px;
+  border: none;
+  border-radius: 21px;
+  background: #000;
+  color: #fff;
+  font-size: 15px;
+}
+
+form input:focus {
+  outline: 2px solid #444;
+}
+
+.btn-submit {
+  margin-top: 26px;
+  padding: 13px 31px;
+  border: none;
+  border-radius: 26px;
+  font-size: 17px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 140px;
+  align-self: center;
+}
+
+.btn-submit:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.forgot {
+  font-size: 13px;
+  color: #777;
+  text-decoration: none;
+  margin: 2px 0 0 0;
+  display: inline-block;
+  text-align: right;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* RESET FEEDBACK üzenet */
+#responseMsg {
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  min-height: 18px;
+}

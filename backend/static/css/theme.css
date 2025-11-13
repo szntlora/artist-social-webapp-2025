@@ -1,0 +1,632 @@
+/* === theme.css (MuseXion – célzott ikon fixekkel) === */
+
+/* 🌙 Alapértelmezett DARK MODE */
+:root {
+  --bg-color: #0d0d0d;
+  --text-color1: #ffffff;
+  --text-color2: #ffffff;
+
+  --card-bg: #1a1a1a;
+  --card-alt-bg: #1f1f1f;
+
+  --border-color: #333;
+  --subtext-color: #bbb;
+  --muted-text: #888;
+
+  --scrollbar-track: #111;
+  --scrollbar-thumb: #444;
+
+  --accent-color: #ff5506;
+  --mention-color: #a55eff;
+
+  --artist-type-color: #ff7b29;
+  --highlight-glow: #ff9800;
+  --highlight-border: #ffa726;
+  --notification-hover: #ffa726;
+  --dropdown-bg: #181818;
+  --text-secondary: #ddd;
+  --divider-color: #444;
+}
+
+/* ☀️ LIGHT MODE override */
+body.light-mode {
+  --bg-color: #0d0d0d; /* kevésbé rikító, meleg világos */
+  --text-color1: #0d0d0d;
+  --text-color2: #ffffff;
+
+  --card-bg: #fffdfdff;
+  --card-alt-bg: #ffffffff;
+
+  --border-color: #515151ff;
+  --subtext-color: #444444;
+  --muted-text: #666666;
+
+  --scrollbar-track: #ffffffff;
+  --scrollbar-thumb: #000000ff;
+
+  --accent-color: #ff5506;
+  --mention-color: #883ac4;
+
+  --artist-type-color: #ff7b29;
+  --highlight-glow: #ff9800;
+  --highlight-border: #ffa726;
+  --notification-hover: #ff7b29;
+  --dropdown-bg: #ffffff;
+  --text-secondary: #333333;
+  --divider-color: #cccccc;
+  --scrollbar-thumb: #fff;
+  --scrollbar-track: #000;
+}
+
+/* 🔄 Alkalmazás az oldal elemein */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.create-post-drawer {
+  position: fixed;
+  top: 70px; /* <-- pont a navbar alá igazítva */
+  right: -400px;
+  width: 400px;
+  height: calc(100vh - 70px); /* a navbar magasságát kivonjuk */
+  background: var(--card-bg);
+  color: var(--text-color1);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.4s ease-in-out;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+
+.card,
+.modal,
+.feed-section,
+.right-panel,
+.left-panel {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+button,
+input,
+textarea {
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+/* 🔧 Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* === Célzott ikon filterek === */
+
+/* Csak a szürke ikonokat fehérítjük inverteléssel */
+img.icon,
+.post-menu-toggle,
+.report-icon,
+.delete-icon {
+  # filter: invert(100%) brightness(100%) !important;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.create-post textarea{
+    margin-top: 8px !important;
+}
+
+img.icon:hover,
+.post-menu-toggle:hover,
+.report-icon:hover,
+.delete-icon:hover {
+  opacity: 1;
+}
+
+/* LIKE ikon aktív állapotban narancssárga */
+.icon-btn.liked img,
+.icon-btn.liked {
+  filter: none;
+  color: var(--accent-color) !important;
+}
+
+/* Logout gomb */
+#logoutBtn {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+#logoutBtn:hover {
+  background: var(--accent-color) !important;
+  color: #fff !important;
+}
+
+/* Navbar és feed háttér */
+.navbar,
+.feed-wrapper,
+.feed-section {
+  background-color: var(--bg-color) !important;
+}
+
+/*----------------------------------------------------------------*/
+
+/* === LIGHT MODE ikon színek === */
+body.light-mode img.icon,
+body.light-mode .post-menu-toggle,
+body.light-mode .report-icon,
+body.light-mode .delete-icon {
+  filter: none !important;
+  opacity: 0.8;
+}
+
+body.light-mode img.icon:hover,
+body.light-mode .post-menu-toggle:hover,
+body.light-mode .report-icon:hover,
+body.light-mode .delete-icon:hover {
+  opacity: 1;
+}
+
+/* Like ikon aktív állapotban is jól látható legyen */
+body.light-mode .icon-btn.liked img,
+body.light-mode .icon-btn.liked {
+  color: var(--accent-color) !important;
+}
+
+body.light-mode #homeBtn:hover,
+body.light-mode #logoutBtn:hover,
+body.light-mode .follow-btn:hover {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: 1px solid var(--accent-color);
+}
+
+button, .follow-btn, #homeBtn, #logoutBtn {
+  transition: all 0.25s ease-in-out;
+}
+
+.suggest-item {
+  color: var(--text-color1);
+}
+.suggest-item:hover {
+  color: var(--text-color2);
+}
+.no-result {
+  color: var(--subtext-color);
+}
+
+#logoutBtn:hover {
+  color: var(--text-color2) !important;
+}
+
+
+.post-btn {
+  color: var(--text-color2);
+}
+.drawer-header h3 {
+  color: var(--text-color1);
+}
+
+#logoutBtn {
+  color: var(--text-color1) !important;
+  background: var(--card-bg) !important;
+}
+
+#logoutBtn:hover {
+  color: var(--text-color2) !important;
+  background: var(--border-color) !important;
+}
+
+.suggest-item {
+  color: var(--text-color1) !important;
+}
+.suggest-item:hover {
+  color: var(--text-color2) !important;
+}
+.no-result {
+  color: var(--subtext-color) !important;
+}
+
+
+/* Light mode - Notifications dropdown */
+body.light-mode #notificationDropdown {
+  background: #f7f7f7 !important;
+  color: var(--text-color1) !important;
+  border: 1px solid var(--border-color);
+}
+
+body.light-mode .notification-dropdown .dropdown-header {
+  background: linear-gradient(90deg, var(--accent-color), #ffc078);
+  color: black !important;
+}
+
+body.light-mode .notification-item {
+  color: var(--text-color1) !important;
+}
+
+body.light-mode .notification-item:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* LIGHT MODE - SEARCH SUGGESTION DROPDOWN */
+body.light-mode .search-suggestions {
+  background: #ffffff !important;
+  color: var(--text-color1) !important;
+  border: 1px solid var(--border-color);
+}
+
+body.light-mode .suggest-item {
+  color: var(--text-color1) !important;
+}
+
+body.light-mode .suggest-item:hover {
+  background-color: #ffffff !important;
+  color: var(--text-color2) !important;
+}
+
+body.light-mode .no-result {
+  color: var(--text-color1) !important;
+}
+
+/* LIGHT MODE - "Click to Post" drawer trigger text */
+body.light-mode .slide-trigger {
+  color: var(--text-color2) !important;
+}
+
+/* 🔧 Scrollbar – világos módban fekete háttér, fehér csík */
+body.light-mode *::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.light-mode *::-webkit-scrollbar-track {
+  background: #000;
+}
+
+body.light-mode *::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 6px;
+}
+
+body.light-mode *::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+
+/* Firefox támogatás */
+body.light-mode {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #000;
+}
+
+
+
+body.light-mode .side-btn {
+  /* non-active */
+  background: #000000 !important;        /* fekete háttér */
+  color: #ffffff !important;             /* fehér felirat */
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+/* aktív vagy hover: fehér + fekete */
+body.light-mode .side-btn.active,
+body.light-mode .side-btn:hover {
+  background: var(--card-bg) !important;     /* fehér/kártya háttér (a te változód) */
+  color: var(--text-color1) !important;      /* fekete (vagy amit text-color1 tartalmaz) */
+  border: 1px solid var(--border-color) !important;
+}
+
+/* ha szeretnéd, a fókusz is ugyanazt kapja */
+body.light-mode .side-btn:focus {
+  background: var(--card-bg) !important;
+  color: var(--text-color1) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🌞 Light mode világosabb hashtag színek */
+body.light-mode .hashtag {
+  background: #e0e0e0;         /* világos szürke háttér */
+  color: #333;                 /* sötétszürke szöveg */
+}
+
+body.light-mode .hashtag:hover {
+  background: #d5d5d5;
+  color: #000;
+  text-decoration: underline;
+}
+
+
+/* ✅ Light Mode - Post drawer dizájn igazítása a dark módhoz */
+
+body.light-mode .create-post-drawer {
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--text-color1);
+  box-shadow: -2px 0 25px rgba(0, 0, 0, 0.15);
+  border-left: 3px solid #ff5506;
+  backdrop-filter: blur(10px);
+}
+
+/* Drawer header címsor */
+body.light-mode .drawer-header h3 {
+  color: var(--text-color1);
+}
+
+/* Bezáró gomb */
+body.light-mode .close-drawer-btn {
+  color: var(--text-color1);
+}
+body.light-mode .close-drawer-btn:hover {
+  color: var(--accent-color);
+}
+
+/* Textarea */
+body.light-mode .create-post textarea {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Placeholder */
+body.light-mode .create-post textarea::placeholder {
+  color: #888;
+}
+
+/* Kategória legördülő */
+body.light-mode #postCategory {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+body.light-mode #postCategory option {
+  background: #fff;
+  color: #000;
+}
+
+/* Feltöltött fájlok preview */
+body.light-mode .file-preview-item {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Feltöltés ikon */
+body.light-mode .upload-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+body.light-mode .upload-btn img {
+  filter: brightness(0.1);
+}
+
+/* Post gomb */
+body.light-mode .post-btn {
+  background: linear-gradient(135deg, #000, #333);
+  color: #fff;
+  border: none;
+}
+body.light-mode .post-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Feltöltés hibák */
+body.light-mode #postError {
+  color: #d00000;
+}
+
+/* 🎨 Light mode – pillangó narancssárga színre színezése */
+body.light-mode .butterfly-container img {
+  filter: brightness(0) saturate(100%) sepia(100%) hue-rotate(-10deg) saturate(400%) brightness(1.1);
+}
+
+
+
+/* ===== ICON FIX - LIGHT MODE ===== */
+
+/* --- Alap: minden ikon fekete legyen light módban --- */
+body.light-mode .post-footer .icon-btn img {
+  filter: brightness(0.05) !important;
+  opacity: 1 !important;
+}
+
+/* --- Liked állapot: csak a like marad narancssárga --- */
+body.light-mode .post-footer .icon-btn.liked img.like-icon {
+  filter: none !important; /* ne változtassunk rajta, marad eredeti (pl. orange png) */
+}
+
+/* === 🔧 COMMENT MODAL IKONOK – LIGHT MODE === */
+
+/* Szív (like comment) – alapból fekete, liked marad színes (orange png) */
+body.light-mode .comment-actions .icon-btn img.comment-like-icon {
+  filter: brightness(0.05) !important;
+  opacity: 1 !important;
+}
+
+body.light-mode .comment-actions .icon-btn.liked img.comment-like-icon {
+  filter: none !important;
+}
+
+/* Kuka (delete icon) – fekete */
+body.light-mode .comment-actions .icon-btn img.delete-icon {
+  filter: brightness(0.05) !important;
+  opacity: 1 !important;
+}
+
+/* === ✏️ POST GOMB – fekete háttér, fehér szöveg === */
+body.light-mode .comment-input-container button {
+  background: #000 !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body.light-mode .comment-input-container button:hover {
+  background: #222 !important;
+}
+
+body.light-mode .comment-form button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: none;
+}
+
+body.light-mode .comment-form button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* 🔧 LIGHT MODE: csak kommentmodal ikonok feketévé */
+body.light-mode #commentModal .comment-delete-icon,
+body.light-mode #commentModal .comment-like-icon,
+body.light-mode #commentModal .comment-report-icon {
+  filter: brightness(0.05) !important;
+  opacity: 1 !important;
+}
+
+/* Ha a like aktív, maradjon narancs (mint ahogy a JS is hozzáadja a `liked` class-t) */
+body.light-mode #commentModal .comment-like-icon.liked {
+  filter: none !important;
+}
+
+/* LIGHT MODE: komment beküldés gomb fixen fekete-fehér, hover nélkül */
+body.light-mode #commentModal .comment-input button {
+  background: #000 !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+body.light-mode #commentModal .comment-input button:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* ✅ LIGHT MODE – komment modal ikonok és szövegek fixálása */
+
+body.light-mode #commentModal .delete-icon,
+body.light-mode #commentModal .report-icon {
+  filter: brightness(0.05) !important;
+  opacity: 1 !important;
+}
+
+/* ✅ LIGHT MODE – confirm modal szöveg színe fix */
+body.light-mode #confirmModal .modal-message,
+body.light-mode #confirmModal .modal-buttons button {
+  color: var(--text-color1) !important;
+}
+
+/* ✅ LIGHT MODE - komment modal kukára és zászlóra fekete ikon */
+body.light-mode .comment-delete.icon-btn img,
+body.light-mode .comment-report.icon-btn img {
+  filter: brightness(0.05) !important;
+}
+
+/* Light mode – csak a ... ikon (post-menu-toggle) legyen sötét */
+body.light-mode .post-card .post-menu-toggle {
+  filter: brightness(0) !important;
+  opacity: 0.6; /* opcionális halványítás */
+}
+
+/* MuseXion Light Mode profilpanel – fekete háttér + alsó fehér sugár */
+
+body.light-mode .profile-panel {
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(255, 255, 255, 0.4) 0%,
+    #0d0d0d 55%
+  );
+  color: #f0f0f0;
+  border-right: 1px solid #222;
+  box-shadow: inset -4px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Profilkép */
+body.light-mode .profile-left .large-pic {
+  border: 3px solid #ff5506;
+  box-shadow: 0 0 12px rgba(255, 85, 6, 0.3);
+  background-color: #111;
+}
+
+/* Név */
+body.light-mode .profile-panel h2 {
+  color: #ff5506;
+  font-weight: 700;
+}
+
+/* Felhasználónév */
+body.light-mode .profile-panel .username {
+  color: #ddd;
+  font-size: 1rem;
+}
+
+/* Role */
+body.light-mode .profile-role {
+  font-style: italic;
+  color: #ff5506;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+/* Aláhúzás */
+body.light-mode .profile-underline {
+  width: 40px;
+  height: 2px;
+  background: #ff5506;
+  margin: 6px auto 12px;
+}
+
+/* Statisztika box */
+body.light-mode .profile-stats {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #444;
+  border-radius: 12px;
+  color: #eee;
+}
+
+body.light-mode .profile-stats .stat-label {
+  color: #aaa;
+}
+
+/* Alsó dekorcsík */
+body.light-mode .profile-panel .bottom-accent {
+  height: 2px;
+  background: linear-gradient(to right, #ff5506, #ff9b42);
+  width: 20px;
+  margin: 16px auto 0;
+  border-radius: 1px;
+}
