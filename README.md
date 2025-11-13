@@ -1,4 +1,4 @@
-MuseXion — Online Art Community Platform
+Online Art Community Platform
 
 MuseXion is a modern full-stack web platform built for artists to share their work, connect with others, and grow their digital presence.
 It offers a complete community experience: artwork feed, comments, likes, tags, categories, profiles, and real-time notifications.
@@ -15,5 +15,7 @@ Key Features
 
 Tech Stack:
 Backend: Python, Django, Django REST Framework, MySQL, JWT
+UX/UI: Figma 
 Frontend: HTML, CSS, JavaScript
 Additional: Django Filters, Pillow, CORS
+
